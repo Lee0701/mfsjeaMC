@@ -14,6 +14,10 @@
 #   use: true|false = true // Whether to uses the Escaper
 #   start: char = '[' // The start of escaper group, must be one character
 #   end: char = ']' // The end of escaper group, must be one character
+initial-state:
+  use-mfsjea: true
+  specified-input: null
+  specified-output: null
 message-format:
   short-criteria: 1
   short: NEXT

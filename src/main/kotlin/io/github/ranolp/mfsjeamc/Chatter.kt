@@ -53,21 +53,21 @@ class Chatter private constructor(private val uuid: UUID) {
 
     @get:JvmName("useMfsjea")
     @set:JvmName("useMfsjea")
-    var useMfsjea: Boolean = true
+    var useMfsjea: Boolean = Configuration.InitialState.useMfsjea
         set(value) {
             field = value
             save()
         }
 
     @set:JvmName("specify")
-    var inputKeyboard: InputKeyboard? = null
+    var inputKeyboard: InputKeyboard? = Configuration.InitialState.inputKeyboard
         set(value) {
             field = value
             updateMfsjea()
             save()
         }
     @set:JvmName("specify")
-    var outputKeyboard: OutputKeyboard? = null
+    var outputKeyboard: OutputKeyboard? = Configuration.InitialState.outputKeyboard
         set(value) {
             field = value
             updateMfsjea()

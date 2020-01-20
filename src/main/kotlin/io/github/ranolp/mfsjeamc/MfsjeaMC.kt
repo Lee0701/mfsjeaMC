@@ -2,6 +2,7 @@
 
 package io.github.ranolp.mfsjeamc
 
+import io.github.ranolp.mfsjea.keyboard.InputKeyboard
 import io.github.ranolp.mfsjeamc.command.EnkoCommand
 import io.github.ranolp.mfsjeamc.command.KeyboardCommand
 import io.github.ranolp.mfsjeamc.command.ReloadConfigCommand
@@ -62,6 +63,23 @@ class MfsjeaMC : JavaPlugin() {
         reloadConfig()
         config.getKeys(true).forEach { key ->
             when (key) {
+                "initial-state.use-mfsjea" -> {
+                    if(config.isBoolean(key)) {
+                        Configuration.InitialState.useMfsjea = config.getBoolean(key)
+                    } else {
+                        logger.warning("$key must be boolean")
+                    }
+                }
+                "initial-state.specified-input" -> {
+                    if(config.isString(key)) {
+                        Configuration.InitialState.inputKeyboard = inputKeyboards.firstOrNull { it.name == config.getString(key) }
+                    }
+                }
+                "initial-state.specified-output" -> {
+                    if(config.isString(key)) {
+                        Configuration.InitialState.outputKeyboard = outputKeyboards.firstOrNull { it.name == config.getString(key) }
+                    }
+                }
                 "message-format.short-criteria" -> {
                     if (config.isInt(key)) {
                         Configuration.MessageFormat.shortCriteria = config.getInt(key)
