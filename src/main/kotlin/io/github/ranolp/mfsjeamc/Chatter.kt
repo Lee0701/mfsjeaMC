@@ -27,6 +27,11 @@ class Chatter private constructor(private val uuid: UUID) {
 
     init {
         val data = ChatterDAO.get(uuid)
+        let {
+            useMfsjea = Configuration.InitialState.useMfsjea
+            inputKeyboard = Configuration.InitialState.inputKeyboard
+            outputKeyboard = Configuration.InitialState.outputKeyboard
+        }
         data["use-mfsjea"]?.takeIf { it is Boolean }?.let {
             useMfsjea = it as Boolean
         }
@@ -53,21 +58,21 @@ class Chatter private constructor(private val uuid: UUID) {
 
     @get:JvmName("useMfsjea")
     @set:JvmName("useMfsjea")
-    var useMfsjea: Boolean = Configuration.InitialState.useMfsjea
+    var useMfsjea: Boolean = true
         set(value) {
             field = value
             save()
         }
 
     @set:JvmName("specify")
-    var inputKeyboard: InputKeyboard? = Configuration.InitialState.inputKeyboard
+    var inputKeyboard: InputKeyboard? = null
         set(value) {
             field = value
             updateMfsjea()
             save()
         }
     @set:JvmName("specify")
-    var outputKeyboard: OutputKeyboard? = Configuration.InitialState.outputKeyboard
+    var outputKeyboard: OutputKeyboard? = null
         set(value) {
             field = value
             updateMfsjea()
